@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+            http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+        ">
+    
+       <!-- DB Properties Placeholder -->
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="location" value="classpath:database.mysql.properties" />
+    </beans:bean>
+
+	
+    <beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+              destroy-method="close">
+        <beans:property name="driverClassName" value="${jdbc.driverClassName}" />
+        <beans:property name="url" value="${jdbc.url}" />
+        <beans:property name="username" value="${jdbc.username}" />
+        <beans:property name="password" value="${jdbc.password}" />
+    </beans:bean>
+    
+    <!-- Use in-memory embedded H2 database -->
+<!--    <jdbc:embedded-database id="dataSource" type="H2">
+    </jdbc:embedded-database>
+    <jdbc:initialize-database data-source="dataSource">
+  <jdbc:script location="classpath:scripts\h2\db-01.sql"/>
+</jdbc:initialize-database>-->
+
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <beans:bean id="hibernate4AnnotatedSessionFactory" 
+                    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="packagesToScan" value="pl.mygames.hackandslash.model" />
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect
+                </beans:prop>
+                <beans:prop key="hibernate.default_schema">hackandslash</beans:prop>
+                <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="jadira.usertype.autoRegisterUserTypes">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+	
+    <!-- Dao and Service mapping -->
+        
+    <context:annotation-config/>
+    <context:component-scan base-package="pl.mygames.hackandslash" />
+	
+    <!-- Transaction manager -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+	
+    <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+    
+</beans:beans>
