@@ -2,7 +2,7 @@ package com.atos.startup.model;
 
 import java.util.List;
 
-public class BoardField extends AbstractEntity{
+public class BoardField {
 	private static final long serialVersionUID = -3610499441626872839L;
 	private Integer id;
 	private Colour colour;
@@ -11,14 +11,12 @@ public class BoardField extends AbstractEntity{
 	private String description;
 	private List <RealEstate> realEstates;
 	
-	public BoardField(Integer id, Colour colour, String name, FieldType type, String description,
-			List<RealEstate> realEstates) {
+	public BoardField(Integer id, Colour colour, String name, FieldType type, String description) {
 		this.id = id;
 		this.colour = colour;
 		this.name = name;
 		this.type = type;
 		this.description = description;
-		this.realEstates = realEstates;
 	}
 	public Integer getId() {
 		return id;

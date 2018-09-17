@@ -14,7 +14,7 @@ public class FieldGenerator implements Generator<BoardField>{
 		List<BoardField> fields = new ArrayList<>();
 		
 		for (int i=0; i < FIELD_COUNT.getNumber(); i++) {
-			BoardField field = new BoardField();
+			BoardField field = new BoardField(i, null, null, null, null);
 			fields.add(field);
 		}
 		return fields;
