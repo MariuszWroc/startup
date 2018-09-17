@@ -1,11 +1,11 @@
 package com.atos.startup.model;
 
-public enum RealEstate {
-	HOTEL(32), HOUSE(12);
+public enum CardType {
+	TITLE_OF_OWNERSHIP(28), CHANCE(16), SOCIAL_SECURITY(16);
 	
 	private final Integer number;
 	
-	private RealEstate(Integer number) {
+	private CardType(Integer number) {
 		this.number = number;
 	}
 	

@@ -9,6 +9,17 @@ public class Money {
 	private Integer oneHundretCredits;
 	private Integer fiveHundretsCredits;
 	
+	public Money(Integer oneCredits, Integer fiveCredits, Integer tenCredits, Integer twentyCredits,
+			Integer fiftyCredits, Integer oneHundretCredits, Integer fiveHundretsCredits) {
+		this.oneCredits = oneCredits;
+		this.fiveCredits = fiveCredits;
+		this.tenCredits = tenCredits;
+		this.twentyCredits = twentyCredits;
+		this.fiftyCredits = fiftyCredits;
+		this.oneHundretCredits = oneHundretCredits;
+		this.fiveHundretsCredits = fiveHundretsCredits;
+	}
+
 	public Money() {
 		this.oneCredits = 5;
 		this.fiveCredits = 1;
@@ -18,6 +29,7 @@ public class Money {
 		this.oneHundretCredits = 4;
 		this.fiveHundretsCredits = 2;
 	}
+	
 	public Integer getOneCredits() {
 		return oneCredits;
 	}
