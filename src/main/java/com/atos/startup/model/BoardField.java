@@ -3,7 +3,6 @@ package com.atos.startup.model;
 import java.util.List;
 
 public class BoardField {
-	private static final long serialVersionUID = -3610499441626872839L;
 	private Integer id;
 	private Colour colour;
 	private String name;
