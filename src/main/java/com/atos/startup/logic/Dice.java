@@ -2,11 +2,15 @@ package com.atos.startup.logic;
 
 import java.util.Random;
 
-public class Dice {
-	private static final int MESH_NUMBER = 6;
+import static com.atos.startup.logic.Settings.MESH_NUMBER;
 
-	public int roll() {
+public class Dice {
+	
+	private Dice() {
+	}
+
+	public static int roll() {
 		Random random = new Random();
-		return random.nextInt()*MESH_NUMBER;
-	};
+		return random.nextInt()*MESH_NUMBER.getNumber();
+	}
 }
