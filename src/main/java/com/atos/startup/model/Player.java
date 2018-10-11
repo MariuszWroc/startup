@@ -3,6 +3,7 @@ package com.atos.startup.model;
 public final class Player {
 	private Money money;
 
+
 	public Player() {
 		this.money = new Money();
 	}
